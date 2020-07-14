@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.bsp_security.user.mapper.UserMapper">
+    <insert id="insert"  parameterType="User">
+        insert into sys_user values(#{user_id}, #{username}, #{password}, #{name}, #{rights},
+            #{role_id}, #{last_login}, #{ip}, #{status}, #{bz}, #{skin}, #{email}, #{number},
+            #{phone}, #{man_buyer_id})
+    </insert>
+
+    <update id="update" parameterType="User">
+        update sys_user set USERNAME=#{username}, PASSWORD=#{password}, NAME=#{name}, RIGHTS=#{rights},
+            ROLE_ID=#{role_id}, LAST_LOGIN=#{last_login}, IP=#{ip}, STATUS=#{status}, BZ=#{bz}, SKIN=#{skin}, EMAIL=#{email}, NUMBER=#{number},
+            PHONE=#{phone}, MAN_BUYER_ID=#{man_buyer_id} where USER_ID=#{user_id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.String">
+        delete from sys_user where USER_ID=#{user_id}
+    </delete>
+
+    <select id="getAll" resultMap="_user">
+        select * from sys_user
+    </select>
+
+    <select id="getById" parameterType="java.lang.String">
+        select * from sys_user where USER_ID=#{user_id}
+    </select>
+
+    <select id="getAllByFilter" parameterType="java.util.Map" resultMap="_user">
+        select * from sys_user
+        <where>
+            <if test="user_id != null">
+                USER_ID = #{user_id}
+            </if>
+            <if test="username != null">
+                and USERNAME = #{username}
+            </if>
+            <if test="password != null">
+                and PASSWORD = #{password}
+            </if>
+            <if test="name != null">
+                and NAME = #{name}
+            </if><if test="rights != null">
+                and RIGHTS = #{rights}
+            </if><if test="ROLE_ID != null">and ROLE_ID = #{ROLE_ID}</if>
+            <if test="LAST_LOGIN != null">and LAST_LOGIN = #{LAST_LOGIN}</if>
+            <if test="IP != null">and IP = #{IP}</if>
+            <if test="STATUS != null">and STATUS = #{STATUS}</if>
+            <if test="BZ != null">and BZ = #{BZ}</if>
+            <if test="SKIN != null">and SKIN = #{SKIN}</if>
+            <if test="EMAIL != null">and EMAIL = #{EMAIL}</if>
+            <if test="NUMBER != null">and NUMBER = #{NUMBER}</if>
+            <if test="PHONE != null">and PHONE = #{PHONE}</if>
+            <if test="MAN_BUYER_ID != null">and MAN_BUYER_ID = #{MAN_BUYER_ID}</if>
+        </where>
+    </select>
+
+
+
+
+
+    <resultMap id="_user" type="User">
+        <id column="USER_ID" property="user_id"/>
+        <result column="USERNAME" property="username" />
+        <result column="PASSWORD" property="password" />
+        <result column="NAME" property="name" />
+        <result column="RIGHTS" property="rights" />
+        <result column="ROLE_ID" property="role_id" />
+        <result column="LAST_LOGIN" property="last_login" />
+        <result column="IP" property="ip" />
+        <result column="STATUS" property="status" />
+        <result column="BZ" property="bz" />
+        <result column="SKIN" property="skin" />
+        <result column="EMAIL" property="email" />
+        <result column="NUMBER" property="number" />
+        <result column="PHONE" property="phone" />
+        <result column="MAN_BUYER_ID" property="man_buyer_id" />
+    </resultMap>
+</mapper>

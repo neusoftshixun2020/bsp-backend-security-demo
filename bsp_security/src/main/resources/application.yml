@@ -1,0 +1,17 @@
+server:
+  port: 8091
+
+spring:
+  datasource:
+    druid:
+      username: root
+      password: 54321dachuang
+      url: jdbc:mysql://49.232.199.44:3306/bsp_security?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
+      driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mappers/*/*Mapper.xml
+  type-aliases-package: com.neusoft.bsp_security.*.entity
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+

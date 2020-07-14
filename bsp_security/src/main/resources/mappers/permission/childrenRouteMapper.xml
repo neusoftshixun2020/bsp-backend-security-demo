@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.bsp_security.user.mapper.ChildrenRouteMapper">
+    <insert id="insert"  parameterType="ChildrenRoute">
+        insert into children_route values(null, parent_route_id, children_route_path, children_route_name)
+    </insert>
+
+    <update id="update" parameterType="ChildrenRoute">
+        update children_route set parent_route_id=#{parent_route_id}, children_route_path=#{children_route_path},
+         children_route_name=#{children_route_name} where children_route_id=#{children_route_id}
+    </update>
+
+    <delete id="delete" parameterType="java.lang.Integer">
+        delete from children_route where children_route_id=#{children_route_id}
+    </delete>
+
+    <select id="getAll" resultType="ChildrenRoute">
+        select * from children_route
+    </select>
+
+    <select id="getById" parameterType="java.lang.Integer" resultType="ChildrenRoute">
+        select * from children_route where children_route_id=#{children_route_id}
+    </select>
+
+    <select id="getAllByFilter" parameterType="java.util.Map" resultType="ChildrenRoute">
+        select * from children_route
+        <where>
+            <if test="children_route_id != null">
+                children_route_id = #{children_route_id}
+            </if>
+            <if test="parent_route_id != null">
+                and parent_route_id = #{parent_route_id}
+            </if>
+            <if test="children_route_path != null">
+                and children_route_path = #{children_route_path}
+            </if>
+            <if test="children_route_name != null">
+                and children_route_name = #{children_route_name}
+            </if>
+        </where>
+    </select>
+</mapper>
